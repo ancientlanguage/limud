@@ -1,0 +1,43 @@
+cabal-version: 2.4
+
+name: hebrew
+version: 1.0
+
+common deps
+  default-language: Haskell2010
+  ghc-options:
+    -Wall
+    -Werror
+    -Wincomplete-uni-patterns
+    -Wincomplete-record-updates
+  build-depends:
+      base
+    , bytestring
+    , fast-logger
+    , directory
+    , filepath
+    , generic-lens
+    , lens
+    , text
+    , unliftio
+
+library
+  import: deps
+  hs-source-dirs: library
+  exposed-modules:
+    Hebrew
+
+executable hebrew
+  import: deps
+  hs-source-dirs: app
+  main-is: Main.hs
+  build-depends: hebrew
+
+test-suite hebrew-test
+  import: deps
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  hs-source-dirs: test
+  build-depends:
+      hebrew
+    , hedgehog
